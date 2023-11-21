@@ -1,0 +1,53 @@
+{
+  "preset": "laravel",
+  "rules": {
+      "assign_null_coalescing_to_coalesce_equal": true,
+      "not_operator_with_space": false,
+      "not_operator_with_successor_space": false,
+      "concat_space": {
+          "spacing": "one"
+      },
+      "ordered_traits": true,
+      "ordered_interfaces": true,
+      "no_superfluous_elseif": true,
+      "no_superfluous_phpdoc_tags": false,
+      "no_useless_else": true,
+      "combine_consecutive_unsets": true,
+      "combine_consecutive_issets": true,
+      "use_arrow_functions": true,
+      "ternary_to_null_coalescing": true,
+      "operator_linebreak": {
+          "position": "beginning"
+      },
+      "single_quote": {
+          "strings_containing_single_quote_chars": true
+      },
+      "void_return": true,
+      "simplified_if_return": true,
+      "method_argument_space": {
+          "on_multiline": "ensure_fully_multiline"
+      },
+      "method_chaining_indentation": true,
+      "self_accessor": true,
+      "phpdoc_align": {
+          "align": "left"
+      },
+      "phpdoc_add_missing_param_annotation": true,
+      "phpdoc_separation": {
+          "groups": [
+              [
+                  "param"
+              ],
+              [
+                  "throws"
+              ],
+              [
+                  "return"
+              ]
+          ]
+      },
+      "php_unit_construct": true,
+      "php_unit_set_up_tear_down_visibility": true,
+      "Laravel/laravel_phpdoc_alignment": false
+  }
+}
