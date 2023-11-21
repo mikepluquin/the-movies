@@ -214,4 +214,14 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Api Keys
+    |--------------------------------------------------------------------------
+    |
+    | External api keys
+    |
+    */
+
+    'tmdb_api_key' => env('TMDB_API_KEY'),
 ];
