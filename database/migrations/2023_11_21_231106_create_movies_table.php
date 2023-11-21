@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('poster_path');
+            $table->boolean('synchronization_enabled')->default(true);
 
             $table->timestamps();
         });
