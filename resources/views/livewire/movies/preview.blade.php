@@ -22,9 +22,12 @@
             @endif
 
             {{-- See details --}}
-            <button class="mt-4 text-indigo-500 font-bold">
+            <a
+                href="{{ route('movies.show', ['movie' => $movie->id] )}}"
+                class="mt-4 text-indigo-500 font-bold"
+            >
                 {{ __('See details') }}
-            </button>
+            </a>
         </div>
     </div>
 </div>

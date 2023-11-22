@@ -29,5 +29,6 @@ Route::middleware([
     )
         ->only([
             'index',
+            'show',
         ]);
 });
