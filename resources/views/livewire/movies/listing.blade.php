@@ -7,4 +7,7 @@
             />
         </div>
     @endforeach
+
+    {{-- Pagination --}}
+    {{ $movies->links() }}
 </div>
