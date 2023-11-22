@@ -47,7 +47,7 @@ class Movie extends Model
     {
         if (!is_null($this->poster_path)) {
             return "https://image.tmdb.org/t/p/"
-                . "w" . $size . "/"
+                . "w" . $size
                 . $this->poster_path;
         }
 

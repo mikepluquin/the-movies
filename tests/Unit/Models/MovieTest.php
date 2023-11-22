@@ -52,7 +52,7 @@ class MovieTest extends TestCase
     public function testGetPosterUrlWhenPathPresent()
     {
         $movie = Movie::factory()->create([
-            'poster_path' => 'johnwick.png',
+            'poster_path' => '/johnwick.png',
         ]);
 
         $this->assertEquals(
