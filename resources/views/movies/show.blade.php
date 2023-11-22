@@ -6,10 +6,12 @@
         </h2>
     </x-slot>
 
-    {{-- Listing --}}
+    {{-- Details --}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            ...
+            <livewire:movies.details
+                :movie="$movie"
+            />
         </div>
     </div>
 </x-app-layout>
