@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('movies');
+    return redirect()->route('movies.index');
 });
 
 Route::middleware([
@@ -22,7 +23,11 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/movies', function () {
-        return view('movies');
-    })->name('movies');
+    Route::resource(
+        'movies',
+        MovieController::class,
+    )
+        ->only([
+            'index',
+        ]);
 });
