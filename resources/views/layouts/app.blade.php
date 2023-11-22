@@ -33,7 +33,14 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="max-w-7xl mx-auto p-4">
+                {{-- Flash messages --}}
+                @if (session()->has('success'))
+                    <div class="bg-green-200 text-green-700 p-4 rounded w-fit mb-2 text-sm">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
                 {{ $slot }}
             </main>
         </div>
