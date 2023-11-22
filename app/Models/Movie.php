@@ -10,6 +10,15 @@ class Movie extends Model
     use HasFactory;
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'synchronized_at' => 'datetime',
+    ];
+
+    /**
      * The model's default values for attributes.
      *
      * @var array
@@ -36,6 +45,7 @@ class Movie extends Model
         // Assign attributes
         $movie->tmdb_id = $tdmbId;
         $movie->title = $apiMovie['title'];
+        $movie->synchronized_at = now();
         // Use coalescent operator to allow nullable attributes
         $movie->description = $apiMovie['overview'] ?? null;
         $movie->poster_path = $apiMovie['poster_path'] ?? null;

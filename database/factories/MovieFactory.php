@@ -19,6 +19,7 @@ class MovieFactory extends Factory
         return [
             'title' => $this->faker->words(2, true),
             'tmdb_id' => $this->faker->randomNumber(3, false),
+            'synchronized_at' => now(),
         ];
     }
 }

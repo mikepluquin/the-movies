@@ -11,6 +11,8 @@ class ImportMoviesTest extends TestCase
 {
     public function testSynchronizeFromApi(): void
     {
+        $this->freezeTime();
+
         $apiMovies = TheMovie::getMovies()['results'];
         $moviesCount = Movie::count();
 
@@ -22,6 +24,7 @@ class ImportMoviesTest extends TestCase
                 'title' => $apiMovie['title'],
                 'description' => $apiMovie['overview'],
                 'poster_path' => $apiMovie['poster_path'],
+                'synchronized_at' => now(),
             ]);
         }
         $this->assertDatabaseCount('movies', $moviesCount + count($apiMovies));

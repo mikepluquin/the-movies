@@ -10,6 +10,8 @@ class MovieTest extends TestCase
 {
     public function testSynchronizeFromApiWhenNotExistingAlready(): void
     {
+        $this->freezeTime();
+
         $count = Movie::count();
         $apiMovie = TheMovie::getMovies()['results'][0];
 
@@ -20,12 +22,14 @@ class MovieTest extends TestCase
             'title' => $apiMovie['title'],
             'description' => $apiMovie['overview'],
             'poster_path' => $apiMovie['poster_path'],
+            'synchronized_at' => now(),
         ]);
         $this->assertDatabaseCount('movies', $count + 1);
     }
 
     public function testSynchronizeFromApiWhenExistingAlready(): void
     {
+        $this->freezeTime();
         $apiMovie = TheMovie::getMovies()['results'][0];
 
         Movie::factory()->create([
@@ -40,6 +44,7 @@ class MovieTest extends TestCase
             'title' => $apiMovie['title'],
             'description' => $apiMovie['overview'],
             'poster_path' => $apiMovie['poster_path'],
+            'synchronized_at' => now(),
         ]);
         $this->assertDatabaseCount('movies', $count);
     }
