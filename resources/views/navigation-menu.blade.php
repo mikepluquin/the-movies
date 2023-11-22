@@ -5,14 +5,14 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('movies') }}">
+                    <a href="{{ route('movies.index') }}">
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('movies') }}" :active="request()->routeIs('movies')">
+                    <x-nav-link href="{{ route('movies.index') }}" :active="request()->routeIs('movies.index')">
                         {{ __('The Movies') }}
                     </x-nav-link>
                 </div>
@@ -81,7 +81,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('movies') }}" :active="request()->routeIs('movies')">
+            <x-responsive-nav-link href="{{ route('movies.index') }}" :active="request()->routeIs('movies.index')">
                 {{ __('The Movies') }}
             </x-responsive-nav-link>
         </div>
