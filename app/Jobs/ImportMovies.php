@@ -24,7 +24,7 @@ class ImportMovies implements ShouldQueue, ShouldBeUnique
     {
         // Try to retrieve movies from API
         $apiResponse = app(TheMovie::class)->getMovies();
-        
+
         if (!is_null($apiResponse)) {
             $apiMovies = $apiResponse['results'] ?? [];
 
