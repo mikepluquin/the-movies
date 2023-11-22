@@ -33,6 +33,7 @@
                             class="bg-red-500 hover:bg-red-700 duration-300 px-4 py-2 text-white rounded uppercase font-bold"
                             wire:click="delete"
                         >
+                            <i class="fa-solid fa-trash mr-1"></i>
                             {{ __('Delete' )}}
                         </button>
                     </div>
