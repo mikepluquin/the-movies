@@ -16,4 +16,5 @@ class Movie extends Model
      */
     protected $attributes = [
         'synchronization_enabled' => true, // Synchronize automatically movie from API
+    ];
 }
