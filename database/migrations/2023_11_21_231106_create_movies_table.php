@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('poster_path');
             $table->boolean('synchronization_enabled')->default(true);
+            $table->integer('tmdb_id');
 
             $table->timestamps();
         });
