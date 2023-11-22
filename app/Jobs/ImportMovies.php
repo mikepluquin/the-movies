@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Services\API\TheMovie;
 use App\Models\Movie;
+use Illuminate\Support\Arr;
 
 class ImportMovies implements ShouldQueue, ShouldBeUnique
 {
@@ -28,9 +29,12 @@ class ImportMovies implements ShouldQueue, ShouldBeUnique
         if (!is_null($apiResponse)) {
             $apiMovies = $apiResponse['results'] ?? [];
 
+            // Pluck movies' ids
+            $apiMoviesIds = Arr::pluck($apiMovies, 'id');
+
             // Synchronize each API's movie
-            foreach ($apiMovies as $apiMovie) {
-                Movie::synchronizeFromApi($apiMovie);
+            foreach ($apiMoviesIds as $apiMovieId) {
+                Movie::synchronizeFromApi($apiMovieId);
             }
         }
     }

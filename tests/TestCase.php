@@ -32,6 +32,8 @@ abstract class TestCase extends BaseTestCase
         Http::fake([
             // TMDB API
             'api.themoviedb.org/3/trending/movie/day' => Http::response(TheMovie::getMovies()),
+            'api.themoviedb.org/3/movie/872585' => Http::response(TheMovie::getMovie(872585)),
+            'api.themoviedb.org/3/movie/901362' => Http::response(TheMovie::getMovie(901362)),
 
             // Fake every other requests
             '*' => Http::response(),

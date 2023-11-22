@@ -13,9 +13,9 @@ class MovieTest extends TestCase
         $this->freezeTime();
 
         $count = Movie::count();
-        $apiMovie = TheMovie::getMovies()['results'][0];
+        $apiMovie = TheMovie::getMovie(872585);
 
-        Movie::synchronizeFromApi($apiMovie);
+        Movie::synchronizeFromApi($apiMovie['id']);
 
         $this->assertDatabaseHas('movies', [
             'tmdb_id' => $apiMovie['id'],
@@ -30,14 +30,14 @@ class MovieTest extends TestCase
     public function testSynchronizeFromApiWhenExistingAlready(): void
     {
         $this->freezeTime();
-        $apiMovie = TheMovie::getMovies()['results'][0];
+        $apiMovie = TheMovie::getMovie(872585);
 
         Movie::factory()->create([
             'tmdb_id' => $apiMovie['id'],
         ]);
         $count = Movie::count();
 
-        Movie::synchronizeFromApi($apiMovie);
+        Movie::synchronizeFromApi($apiMovie['id']);
 
         $this->assertDatabaseHas('movies', [
             'tmdb_id' => $apiMovie['id'],

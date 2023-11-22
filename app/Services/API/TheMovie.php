@@ -23,6 +23,7 @@ class TheMovie
     /**
      * Documentation :
      * - https://developer.themoviedb.org/reference/trending-movies
+     *
      * @param array $params
      *
      * @return array|null
@@ -30,6 +31,20 @@ class TheMovie
     public function getMovies(array $params = []): ?array
     {
         return $this->callEndpoint('trending/movie/day', $params);
+    }
+
+    /**
+     * Documentation :
+     * - https://developer.themoviedb.org/reference/movie-details
+     *
+     * @param int $id
+     * @param array $params
+     *
+     * @return array|null
+     */
+    public function getMovie(int $id, array $params = []): ?array
+    {
+        return $this->callEndpoint('movie/' . $id, $params);
     }
 
     /**
