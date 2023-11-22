@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('poster_path');
+            $table->string('poster_path')->nullable();
             $table->boolean('synchronization_enabled')->default(true);
             $table->integer('tmdb_id');
 
