@@ -17,7 +17,8 @@ class MovieFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->words(2, true),
+            'tmdb_id' => $this->faker->randomNumber(3, false),
         ];
     }
 }
