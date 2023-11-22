@@ -27,6 +27,38 @@ class Movie extends Model
         'synchronization_enabled' => true, // Synchronize automatically movie from API
     ];
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | GETTERS
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Build full poster image's URL
+     * See: https://developer.themoviedb.org/docs/image-basics
+     *
+     * @param int $size
+     *
+     * @return string|null
+     */
+    public function getPosterUrl($size = 200): ?string
+    {
+        if (!is_null($this->poster_path)) {
+            return "https://image.tmdb.org/t/p/"
+                . "w" . $size . "/"
+                . $this->poster_path;
+        }
+
+        return null;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | PROCESSING
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Create or update a movie from API
      *
