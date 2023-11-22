@@ -16,4 +16,17 @@ class Details extends Component
     {
         return view('livewire.movies.details');
     }
+
+    /**
+     * @return void
+     */
+    public function delete(): void
+    {
+        $this->movie->delete();
+
+        session()->flash('success', __('Movie successfully deleted.'));
+
+        redirect()->route('movies.index');
+    }
+
 }
