@@ -42,6 +42,7 @@ class MovieTest extends TestCase
         $this->assertDatabaseHas('movies', [
             'tmdb_id' => $apiMovie['id'],
             'title' => $apiMovie['title'],
+            'tagline' => $apiMovie['tagline'],
             'description' => $apiMovie['overview'],
             'poster_path' => $apiMovie['poster_path'],
             'synchronized_at' => now(),

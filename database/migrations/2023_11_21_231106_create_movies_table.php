@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('backdrop_path')->nullable();
             $table->boolean('synchronization_enabled')->default(true);
             $table->integer('tmdb_id');
+            $table->string('tagline')->nullable();
             $table->integer('budget')->nullable();
             $table->integer('revenue')->nullable();
             $table->integer('runtime')->nullable();

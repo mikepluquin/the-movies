@@ -98,6 +98,7 @@ class Movie extends Model
             $movie->title = $apiMovie['title'];
             $movie->synchronized_at = now();
             // Use coalescent operator to allow nullable attributes
+            $movie->tagline = $apiMovie['tagline'] ?? null;
             $movie->description = $apiMovie['overview'] ?? null;
             $movie->poster_path = $apiMovie['poster_path'] ?? null;
             $movie->backdrop_path = $apiMovie['backdrop_path'] ?? null;
