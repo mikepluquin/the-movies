@@ -123,6 +123,8 @@ class Movie extends Model
             $movie->released_at = $apiMovie['release_date'] ?? null;
             $movie->homepage_url = $apiMovie['homepage'] ?? null;
             $movie->runtime = $apiMovie['runtime'] ?? null;
+            $movie->vote_count = $apiMovie['vote_count'] ?? null;
+            $movie->vote_average = $apiMovie['vote_average'] ?? null;
 
             // Save synchronized movie
             $movie->save();
