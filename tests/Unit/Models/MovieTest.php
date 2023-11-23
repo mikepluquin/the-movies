@@ -60,6 +60,21 @@ class MovieTest extends TestCase
         $this->assertDatabaseCount('movies', $count);
     }
 
+    public function testNotSynchronizeFromApiIdWhenSynchronizationDisabled(): void
+    {
+        $this->freezeTime();
+        $apiMovie = TheMovie::getMovie(872585);
+        Movie::factory()->create([
+            'tmdb_id' => $apiMovie['id'],
+            'synchronization_enabled' => false,
+        ]);
+        $count = Movie::count();
+        $movie = Movie::synchronizeFromApiId($apiMovie['id']);
+
+        $this->assertNull($movie);
+        $this->assertDatabaseCount('movies', $count);
+    }
+
     public function testSynchronizeFromApiIdWhenIdNotFound(): void
     {
         $this->freezeTime();

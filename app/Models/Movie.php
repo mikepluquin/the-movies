@@ -125,34 +125,37 @@ class Movie extends Model
             // Find or init the movie to synchronize
             $movie = Movie::where('tmdb_id', $apiMovieId)->first() ?? new Movie();
 
-            // Assign attributes
-            $movie->tmdb_id = $apiMovieId;
-            $movie->title = $apiMovie['title'];
-            $movie->synchronized_at = now();
-            // Use coalescent operator to allow nullable attributes
-            $movie->tagline = $apiMovie['tagline'] ?? null;
-            $movie->description = $apiMovie['overview'] ?? null;
-            $movie->poster_path = $apiMovie['poster_path'] ?? null;
-            $movie->backdrop_path = $apiMovie['backdrop_path'] ?? null;
-            $movie->budget = $apiMovie['budget'] ?? null;
-            $movie->revenue = $apiMovie['revenue'] ?? null;
-            $movie->released_at = $apiMovie['release_date'] ?? null;
-            $movie->homepage_url = $apiMovie['homepage'] ?? null;
-            $movie->runtime = $apiMovie['runtime'] ?? null;
-            $movie->vote_count = $apiMovie['vote_count'] ?? null;
-            $movie->vote_average = $apiMovie['vote_average'] ?? null;
+            // Movie must still have synchronization enabled
+            if ($movie->synchronization_enabled) {
+                // Assign attributes
+                $movie->tmdb_id = $apiMovieId;
+                $movie->title = $apiMovie['title'];
+                $movie->synchronized_at = now();
+                // Use coalescent operator to allow nullable attributes
+                $movie->tagline = $apiMovie['tagline'] ?? null;
+                $movie->description = $apiMovie['overview'] ?? null;
+                $movie->poster_path = $apiMovie['poster_path'] ?? null;
+                $movie->backdrop_path = $apiMovie['backdrop_path'] ?? null;
+                $movie->budget = $apiMovie['budget'] ?? null;
+                $movie->revenue = $apiMovie['revenue'] ?? null;
+                $movie->released_at = $apiMovie['release_date'] ?? null;
+                $movie->homepage_url = $apiMovie['homepage'] ?? null;
+                $movie->runtime = $apiMovie['runtime'] ?? null;
+                $movie->vote_count = $apiMovie['vote_count'] ?? null;
+                $movie->vote_average = $apiMovie['vote_average'] ?? null;
 
-            // Save synchronized movie
-            $movie->save();
+                // Save synchronized movie
+                $movie->save();
 
-            // Assign relations
-            $categories = Arr::map($apiMovie['genres'] ?? [], function ($apiCategory) {
-                return Category::synchronizeFromApiData($apiCategory);
-            });
-            $categoriesIds = Arr::pluck($categories, 'id');
-            $movie->categories()->sync($categoriesIds);
+                // Assign relations
+                $categories = Arr::map($apiMovie['genres'] ?? [], function ($apiCategory) {
+                    return Category::synchronizeFromApiData($apiCategory);
+                });
+                $categoriesIds = Arr::pluck($categories, 'id');
+                $movie->categories()->sync($categoriesIds);
 
-            return $movie;
+                return $movie;
+            }
         }
 
         return null;
