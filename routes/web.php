@@ -30,5 +30,6 @@ Route::middleware([
         ->only([
             'index',
             'show',
+            'edit',
         ]);
 });

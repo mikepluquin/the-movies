@@ -30,4 +30,18 @@ class MovieController extends Controller
             'movie' => $movie,
         ]);
     }
+
+    /**
+     * Display the specified resource edit form.
+     *
+     * @param Movie $movie
+     *
+     * @return View
+     */
+    public function edit(Movie $movie): View
+    {
+        return view('movies.edit', [
+            'movie' => $movie,
+        ]);
+    }
 }

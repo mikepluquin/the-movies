@@ -116,6 +116,19 @@
 
                     {{-- Actions --}}
                     <div class="self-end flex items-center gap-4">
+                        {{-- Edit --}}
+                        <a
+                            href="{{ route('movies.edit', ['movie' => $movie->id] )}}"
+                            class="bg-indigo-500 hover:bg-indigo-700 duration-300 px-4 py-2 text-white rounded uppercase font-bold"
+                        >
+                            {{-- Edit icon --}}
+                            <i
+                                class="fa-solid fa-pencil mr-1"
+                            ></i>
+
+                            {{ __('Edit' )}}
+                        </a>
+
                         @if(auth()->user()->can('synchronize', $this->movie))
                             {{-- Sync --}}
                             <button
@@ -124,7 +137,7 @@
                                 wire:loading.attr="disabled"
                                 wire:target="synchronize"
                             >
-                                {{-- Trash icon --}}
+                                {{-- Sync icon --}}
                                 <i
                                     class="fa-solid fa-rotate mr-1"
                                     wire:loading.class="hidden"
