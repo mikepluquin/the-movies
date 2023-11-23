@@ -3,7 +3,7 @@
     <div class="flex gap-6">
         {{-- Poster --}}
         <img
-            src="{{ $this->getPosterUrl() }}"
+            src="{{ $this->getImageUrl('poster') }}"
             alt="{{ $movie->title }}"
             class="h-32 max-w-[5rem] rounded"
         />

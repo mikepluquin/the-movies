@@ -57,7 +57,7 @@ class MovieTest extends TestCase
         $this->assertDatabaseCount('movies', $count);
     }
 
-    public function testGetPosterUrlWhenPathPresent()
+    public function testGetImageUrlWhenPathPresent()
     {
         $movie = Movie::factory()->create([
             'poster_path' => '/johnwick.png',
@@ -65,16 +65,23 @@ class MovieTest extends TestCase
 
         $this->assertEquals(
             "https://image.tmdb.org/t/p/w500/johnwick.png",
-            $movie->getPosterUrl(500),
+            $movie->getImageUrl('poster', '500'),
         );
     }
 
-    public function testGetPosterUrlWhenPathBlank()
+    public function testGetImageUrlWhenPathBlank()
     {
         $movie = Movie::factory()->create([
             'poster_path' => null,
         ]);
 
-        $this->assertNull($movie->getPosterUrl(500));
+        $this->assertNull($movie->getImageUrl('poster', '500'));
+    }
+
+    public function testGetImageUrlWhenAttributeNotExists()
+    {
+        $movie = Movie::factory()->create();
+
+        $this->assertNull($movie->getImageUrl('logo', '500'));
     }
 }

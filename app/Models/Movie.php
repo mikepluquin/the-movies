@@ -56,16 +56,32 @@ class Movie extends Model
      * Build full poster image's URL
      * See: https://developer.themoviedb.org/docs/image-basics
      *
-     * @param int $size
+     * @param string $imageName Could be "poster", "backdrop"...
+     * @param string $size
      *
      * @return string|null
      */
-    public function getPosterUrl($size = 200): ?string
+    public function getImageUrl(string $imageName, string $size = '200'): ?string
     {
-        if (!is_null($this->poster_path)) {
-            return "https://image.tmdb.org/t/p/"
-                . "w" . $size
-                . $this->poster_path;
+        $imagesNames = [
+            'poster',
+            'backdrop',
+        ];
+
+        // Make sure that a valid image name is provided
+        if (in_array($imageName, $imagesNames)) {
+            // Build image attribute's name
+            $imageAttributeName = $imageName . '_path';
+
+            // Check if image attribute exists
+            if (
+                !is_null($this->{$imageAttributeName})
+            ) {
+                // Build image's url
+                return "https://image.tmdb.org/t/p/"
+                    . "w" . $size
+                    . $this->{$imageAttributeName};
+            }
         }
 
         return null;
