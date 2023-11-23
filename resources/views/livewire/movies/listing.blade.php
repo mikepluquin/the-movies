@@ -7,6 +7,12 @@
         class="rounded border-none mb-4"
     >
 
+    {{-- Loading --}}
+    <i
+        class="fa-solid fa-circle-notch fa-spin text-indigo-500 ml-2"
+        wire:loading.delay
+    ></i>
+
     {{-- Movies --}}
     <div class="space-y-4">
         @foreach ($movies as $movie)

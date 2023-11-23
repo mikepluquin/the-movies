@@ -32,8 +32,20 @@
                         <button
                             class="bg-red-500 hover:bg-red-700 duration-300 px-4 py-2 text-white rounded uppercase font-bold"
                             wire:click="delete"
+                            wire:loading.attr="disabled"
                         >
-                            <i class="fa-solid fa-trash mr-1"></i>
+                            {{-- Trash icon --}}
+                            <i
+                                class="fa-solid fa-trash mr-1"
+                                wire:loading.class="hidden"
+                            ></i>
+
+                            {{-- Loading icon --}}
+                            <i
+                                class="fa-solid fa-circle-notch fa-spin mr-1"
+                                wire:loading
+                            ></i>
+
                             {{ __('Delete' )}}
                         </button>
                     </div>
