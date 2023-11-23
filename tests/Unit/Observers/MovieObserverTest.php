@@ -10,6 +10,7 @@ use Tests\TestCase;
 class MovieObserverTest extends TestCase
 {
     protected Movie $movie;
+
     protected MovieObserver $movieObserver;
 
     protected function setUp(): void

@@ -10,7 +10,7 @@ class Listing extends Component
 {
     use WithPagination;
 
-    public string $search = "";
+    public string $search = '';
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -24,7 +24,7 @@ class Listing extends Component
         ]);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }

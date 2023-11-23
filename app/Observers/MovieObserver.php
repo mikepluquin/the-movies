@@ -9,10 +9,11 @@ class MovieObserver
     /**
      * Handle the Movie "deleting" event.
      *
-     * @param  \App\Models\Movie  $movie
+     * @param \App\Models\Movie $movie
+     *
      * @return void
      */
-    public function deleting(Movie $movie)
+    public function deleting(Movie $movie): void
     {
         $movie->categories()->detach();
     }

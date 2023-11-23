@@ -37,12 +37,12 @@ class Category extends Model
      *
      * @return Category
      */
-    public static function synchronizeFromApiData(array $apiCategory): Category
+    public static function synchronizeFromApiData(array $apiCategory): self
     {
         $tmdbId = $apiCategory['id'];
 
         // Find or init the category to synchronize
-        $category = Category::where('tmdb_id', $tmdbId)->first() ?? new Category();
+        $category = self::where('tmdb_id', $tmdbId)->first() ?? new self();
 
         // Assign attributes
         $category->tmdb_id = $tmdbId;

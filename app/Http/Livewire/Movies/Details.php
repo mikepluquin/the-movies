@@ -9,8 +9,8 @@ use Livewire\Component;
 
 class Details extends Component
 {
-    use WithMovie;
     use AuthorizesRequests;
+    use WithMovie;
 
     public Movie $movie;
 

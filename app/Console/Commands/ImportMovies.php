@@ -19,7 +19,7 @@ class ImportMovies extends Command
      *
      * @var string
      */
-    protected $description = "Import movies to database fetching TheMovieDatabase's API";
+    protected $description = 'Import movies to database fetching TheMovieDatabase\'s API';
 
     /**
      * Execute the console command.

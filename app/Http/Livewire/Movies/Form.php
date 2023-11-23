@@ -9,6 +9,7 @@ use Livewire\Component;
 class Form extends Component
 {
     public Movie $movie;
+
     public $categories_ids;
 
     protected array $rules = [
@@ -17,7 +18,7 @@ class Form extends Component
         'categories_ids' => '',
     ];
 
-    public function save()
+    public function save(): void
     {
         $this->validate();
 
@@ -30,12 +31,12 @@ class Form extends Component
             ->with('success', __('Movie successfully updated.'));
     }
 
-    public function updated($propertyName)
+    public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
     }
 
-    public function mount()
+    public function mount(): void
     {
         // Set default values based on movie's relations
         $this->categories_ids = $this->movie->categories()->pluck('categories.id');

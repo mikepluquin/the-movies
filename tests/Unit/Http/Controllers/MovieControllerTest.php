@@ -14,7 +14,7 @@ class MovieControllerTest extends TestCase
     |--------------------------------------------------------------------------
     */
 
-    public function testIndexSucceed()
+    public function testIndexSucceed(): void
     {
         $this->be(User::factory()->create());
 
@@ -22,7 +22,7 @@ class MovieControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testIndexNotAuthenticated()
+    public function testIndexNotAuthenticated(): void
     {
         $response = $this->get('/movies');
         $response->assertRedirect('/login');
@@ -34,7 +34,7 @@ class MovieControllerTest extends TestCase
     |--------------------------------------------------------------------------
     */
 
-    public function testShowSucceed()
+    public function testShowSucceed(): void
     {
         $this->be(User::factory()->create());
         $movie = Movie::factory()->create();
@@ -43,7 +43,7 @@ class MovieControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testShowNotFound()
+    public function testShowNotFound(): void
     {
         $this->be(User::factory()->create());
         $response = $this->get('/movies/99999');
@@ -51,7 +51,7 @@ class MovieControllerTest extends TestCase
         $response->assertNotFound();
     }
 
-    public function testShowNotAuthenticated()
+    public function testShowNotAuthenticated(): void
     {
         $movie = Movie::factory()->create();
         $response = $this->get('/movies/' . $movie->id);

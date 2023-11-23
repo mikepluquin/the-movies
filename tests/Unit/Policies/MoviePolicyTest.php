@@ -4,12 +4,12 @@ namespace Tests\Unit\Policies;
 
 use App\Models\Movie;
 use App\Models\User;
-use Tests\Mocks\API\TheMovie;
 use Tests\TestCase;
 
 class MoviePolicyTest extends TestCase
 {
     protected Movie $movie;
+
     protected User $user;
 
     protected function setUp(): void

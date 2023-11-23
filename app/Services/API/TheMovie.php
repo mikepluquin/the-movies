@@ -72,6 +72,7 @@ class TheMovie
         if ($response?->successful()) {
             return $response->json();
         }
+
         // Null is returned if request is not successful
         return null;
     }

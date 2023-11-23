@@ -11,8 +11,8 @@ use Laravel\Scout\Searchable;
 
 class Movie extends Model
 {
-    use Searchable;
     use HasFactory;
+    use Searchable;
 
     /**
      * The attributes that should be cast.
@@ -45,7 +45,7 @@ class Movie extends Model
         'synchronization_enabled' => true, // Synchronize automatically movie from API
     ];
 
-     /**
+    /**
      * Get the indexable data array for the model.
      *
      * @return array<string, mixed>
@@ -105,8 +105,8 @@ class Movie extends Model
                 !empty($this->{$imageAttributeName})
             ) {
                 // Build image's url
-                return "https://image.tmdb.org/t/p/"
-                    . "w" . $size
+                return 'https://image.tmdb.org/t/p/'
+                    . 'w' . $size
                     . $this->{$imageAttributeName};
             }
         }
@@ -127,14 +127,14 @@ class Movie extends Model
      *
      * @return Movie|null
      */
-    public static function synchronizeFromApiId(int $apiMovieId): ?Movie
+    public static function synchronizeFromApiId(int $apiMovieId): ?self
     {
         // Retrieve movie from API
         $apiMovie = app(TheMovie::class)->getMovie($apiMovieId);
 
         if (!is_null($apiMovie)) {
             // Find or init the movie to synchronize
-            $movie = Movie::where('tmdb_id', $apiMovieId)->first() ?? new Movie();
+            $movie = self::where('tmdb_id', $apiMovieId)->first() ?? new self();
 
             // Movie must still have synchronization enabled
             if ($movie->synchronization_enabled) {
@@ -159,9 +159,7 @@ class Movie extends Model
                 $movie->save();
 
                 // Assign relations
-                $categories = Arr::map($apiMovie['genres'] ?? [], function ($apiCategory) {
-                    return Category::synchronizeFromApiData($apiCategory);
-                });
+                $categories = Arr::map($apiMovie['genres'] ?? [], fn ($apiCategory) => Category::synchronizeFromApiData($apiCategory));
                 $categoriesIds = Arr::pluck($categories, 'id');
                 $movie->categories()->sync($categoriesIds);
 

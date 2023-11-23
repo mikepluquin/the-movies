@@ -2,17 +2,17 @@
 
 namespace App\Jobs;
 
+use App\Models\Movie;
+use App\Services\API\TheMovie;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Services\API\TheMovie;
-use App\Models\Movie;
 use Illuminate\Support\Arr;
 
-class ImportMovies implements ShouldQueue, ShouldBeUnique
+class ImportMovies implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -21,7 +21,7 @@ class ImportMovies implements ShouldQueue, ShouldBeUnique
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         // Try to retrieve movies from API
         $apiResponse = app(TheMovie::class)->getMovies();

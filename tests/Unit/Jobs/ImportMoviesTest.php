@@ -3,7 +3,6 @@
 namespace Tests\Unit\Jobs;
 
 use App\Jobs\ImportMovies;
-use App\Models\Movie;
 use Tests\Mocks\API\TheMovie;
 use Tests\TestCase;
 

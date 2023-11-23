@@ -14,15 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('movies.index');
-});
+Route::get('/', fn () => redirect()->route('movies.index'));
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
+    'verified',
+])->group(function (): void {
     Route::resource(
         'movies',
         MovieController::class,
