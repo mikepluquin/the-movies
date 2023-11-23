@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Services\API\TheMovie;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Arr;
 use Laravel\Scout\Searchable;
 
 class Movie extends Model
@@ -44,6 +46,20 @@ class Movie extends Model
             'description' => $this->description,
             'tagline' => $this->tagline,
         ];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * A movie belongs to many categories
+     */
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class);
     }
 
     /*
@@ -128,8 +144,17 @@ class Movie extends Model
 
             // Save synchronized movie
             $movie->save();
+
+            // Assign relations
+            $categories = Arr::map($apiMovie['genres'] ?? [], function ($apiCategory) {
+                return Category::synchronizeFromApiData($apiCategory);
+            });
+            $categoriesIds = Arr::pluck($categories, 'id');
+            $movie->categories()->sync($categoriesIds);
+
             return $movie;
         }
+
         return null;
     }
 }

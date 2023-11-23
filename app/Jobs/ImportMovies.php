@@ -34,7 +34,7 @@ class ImportMovies implements ShouldQueue, ShouldBeUnique
 
             // Synchronize each API's movie
             foreach ($apiMoviesIds as $apiMovieId) {
-                Movie::synchronizeFromApi($apiMovieId);
+                Movie::synchronizeFromApiId($apiMovieId);
             }
         }
     }

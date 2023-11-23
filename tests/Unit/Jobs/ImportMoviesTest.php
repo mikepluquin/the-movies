@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class ImportMoviesTest extends TestCase
 {
-    public function testSynchronizeFromApi(): void
+    public function testSynchronizeFromApiId(): void
     {
         $this->freezeTime();
 
