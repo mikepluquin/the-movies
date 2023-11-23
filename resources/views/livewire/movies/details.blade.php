@@ -15,7 +15,7 @@
                     width="300"
                 />
 
-                <div class="flex flex-col justify-between">
+                <div class="flex flex-col justify-between flex-1">
                     {{-- Main details --}}
                     <div>
                         {{-- Title & tagline --}}
@@ -104,7 +104,31 @@
                     </div>
 
                     {{-- Actions --}}
-                    <div class="self-end">
+                    <div class="self-end flex items-center gap-4">
+                        @if(auth()->user()->can('synchronize', $this->movie))
+                            {{-- Sync --}}
+                            <button
+                                class="bg-indigo-500 hover:bg-indigo-700 duration-300 px-4 py-2 text-white rounded uppercase font-bold"
+                                wire:click="synchronize"
+                                wire:loading.attr="disabled"
+                            >
+                                {{-- Trash icon --}}
+                                <i
+                                    class="fa-solid fa-rotate mr-1"
+                                    wire:loading.class="hidden"
+                                ></i>
+
+                                {{-- Loading icon --}}
+                                <i
+                                    class="fa-solid fa-circle-notch fa-spin mr-1"
+                                    wire:loading
+                                ></i>
+
+                                {{ __('Synchronize' )}}
+                            </button>
+                        @endif
+
+                        {{-- Delete --}}
                         <button
                             class="bg-red-500 hover:bg-red-700 duration-300 px-4 py-2 text-white rounded uppercase font-bold"
                             wire:click="delete"
