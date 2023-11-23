@@ -98,9 +98,9 @@ class Movie extends Model
      *
      * @param int $apiMovieId
      *
-     * @return void
+     * @return Movie|null
      */
-    public static function synchronizeFromApi(int $apiMovieId): void
+    public static function synchronizeFromApiId(int $apiMovieId): ?Movie
     {
         // Retrieve movie from API
         $apiMovie = app(TheMovie::class)->getMovie($apiMovieId);
@@ -128,6 +128,8 @@ class Movie extends Model
 
             // Save synchronized movie
             $movie->save();
+            return $movie;
         }
+        return null;
     }
 }

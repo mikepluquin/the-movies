@@ -8,52 +8,66 @@ use Tests\TestCase;
 
 class MovieTest extends TestCase
 {
-    public function testSynchronizeFromApiWhenNotExistingAlready(): void
+    public function testSynchronizeFromApiIdWhenNotExistingAlready(): void
     {
         $this->freezeTime();
-
         $count = Movie::count();
         $apiMovie = TheMovie::getMovie(872585);
 
-        Movie::synchronizeFromApi($apiMovie['id']);
+        $movie = Movie::synchronizeFromApiId($apiMovie['id']);
 
-        $this->assertDatabaseHas('movies', [
-            'tmdb_id' => $apiMovie['id'],
-            'title' => $apiMovie['title'],
-            'description' => $apiMovie['overview'],
-            'poster_path' => $apiMovie['poster_path'],
-            'synchronized_at' => now(),
-        ]);
+        $this->assertEquals($movie->tmdb_id, $apiMovie['id']);
+        $this->assertEquals($movie->title, $apiMovie['title']);
+        $this->assertEquals($movie->tagline, $apiMovie['tagline']);
+        $this->assertEquals($movie->description, $apiMovie['overview']);
+        $this->assertEquals($movie->poster_path, $apiMovie['poster_path']);
+        $this->assertEquals($movie->synchronized_at->format('d/m/y h:i:s'), now()->format('d/m/y h:i:s'));
+        $this->assertEquals($movie->backdrop_path, $apiMovie['backdrop_path']);
+        $this->assertEquals($movie->budget, $apiMovie['budget']);
+        $this->assertEquals($movie->revenue, $apiMovie['revenue']);
+        $this->assertEquals($movie->released_at->format('Y-m-d'), $apiMovie['release_date']);
+        $this->assertEquals($movie->homepage_url, $apiMovie['homepage']);
+        $this->assertEquals($movie->runtime, $apiMovie['runtime']);
+        $this->assertEquals($movie->vote_average, $apiMovie['vote_average']);
+        $this->assertEquals($movie->vote_count, $apiMovie['vote_count']);
         $this->assertDatabaseCount('movies', $count + 1);
     }
 
-    public function testSynchronizeFromApiWhenExistingAlready(): void
+    public function testSynchronizeFromApiIdWhenExistingAlready(): void
     {
         $this->freezeTime();
         $apiMovie = TheMovie::getMovie(872585);
-
         Movie::factory()->create([
             'tmdb_id' => $apiMovie['id'],
         ]);
         $count = Movie::count();
+        $movie = Movie::synchronizeFromApiId($apiMovie['id']);
 
-        Movie::synchronizeFromApi($apiMovie['id']);
+        $this->assertEquals($movie->tmdb_id, $apiMovie['id']);
+        $this->assertEquals($movie->title, $apiMovie['title']);
+        $this->assertEquals($movie->tagline, $apiMovie['tagline']);
+        $this->assertEquals($movie->description, $apiMovie['overview']);
+        $this->assertEquals($movie->poster_path, $apiMovie['poster_path']);
+        $this->assertEquals($movie->synchronized_at->format('d/m/y h:i:s'), now()->format('d/m/y h:i:s'));
+        $this->assertEquals($movie->backdrop_path, $apiMovie['backdrop_path']);
+        $this->assertEquals($movie->budget, $apiMovie['budget']);
+        $this->assertEquals($movie->revenue, $apiMovie['revenue']);
+        $this->assertEquals($movie->released_at->format('Y-m-d'), $apiMovie['release_date']);
+        $this->assertEquals($movie->homepage_url, $apiMovie['homepage']);
+        $this->assertEquals($movie->runtime, $apiMovie['runtime']);
+        $this->assertEquals($movie->vote_average, $apiMovie['vote_average']);
+        $this->assertEquals($movie->vote_count, $apiMovie['vote_count']);
+        $this->assertDatabaseCount('movies', $count);
+    }
 
-        $this->assertDatabaseHas('movies', [
-            'tmdb_id' => $apiMovie['id'],
-            'title' => $apiMovie['title'],
-            'tagline' => $apiMovie['tagline'],
-            'description' => $apiMovie['overview'],
-            'poster_path' => $apiMovie['poster_path'],
-            'synchronized_at' => now(),
-            'backdrop_path' => $apiMovie['backdrop_path'],
-            'budget' => $apiMovie['budget'],
-            'revenue' => $apiMovie['revenue'],
-            'released_at' => $apiMovie['release_date'],
-            'homepage_url' => $apiMovie['homepage'],
-            'runtime' => $apiMovie['runtime'],
-            'poster_path' => $apiMovie['poster_path'],
-        ]);
+    public function testSynchronizeFromApiIdWhenIdNotFound(): void
+    {
+        $this->freezeTime();
+        $count = Movie::count();
+
+        $movie = Movie::synchronizeFromApiId(9999);
+
+        $this->assertNull($movie);
         $this->assertDatabaseCount('movies', $count);
     }
 

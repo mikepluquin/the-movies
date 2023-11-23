@@ -38,10 +38,6 @@ class Details extends Component
     {
         $this->authorize('synchronize', $this->movie);
 
-        Movie::synchronizeFromApi($this->movie->tmdb_id);
-
-        session()->flash('success', __('Movie successfully synchronized.'));
-
-        redirect()->route('movies.show', ['movie' => $this->movie->id]);
+        $this->movie = Movie::synchronizeFromApiId($this->movie->tmdb_id);
     }
 }
