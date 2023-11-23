@@ -20,7 +20,7 @@ class Listing extends Component
     public function render()
     {
         return view('livewire.movies.listing', [
-            'movies' => Movie::search($this->search)->paginate(5),
+            'movies' => Movie::search($this->search)->paginate(6),
         ]);
     }
 

@@ -14,20 +14,18 @@
     ></i>
 
     {{-- Movies --}}
-    <div class="space-y-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         @foreach ($movies as $movie)
-            <div class="bg-white p-6 shadow-md rounded">
-                {{-- Preview each movie --}}
-                <livewire:movies.preview
-                    :movie="$movie"
-                    :key="$movie->id"
-                />
-            </div>
+            {{-- Preview each movie --}}
+            <livewire:movies.preview
+                :movie="$movie"
+                :key="$movie->id"
+            />
         @endforeach
     </div>
 
     {{-- Pagination --}}
-    <div class="mt-4">
+    <div class="mt-12">
         {{ $movies->links() }}
     </div>
 </div>

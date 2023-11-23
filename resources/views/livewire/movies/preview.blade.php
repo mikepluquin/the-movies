@@ -1,33 +1,14 @@
-<div>
-    {{-- Summary --}}
-    <div class="flex gap-6">
-        {{-- Poster --}}
-        <img
-            src="{{ $this->getImageUrl('poster') }}"
-            alt="{{ $movie->title }}"
-            class="h-32 max-w-[5rem] rounded"
-        />
-
-        <div>
-            {{-- Title --}}
-            <h3 class="font-bold text-xl">
-                {{ $movie->title }}
-            </h3>
-
-            {{-- Description --}}
-            @if(!empty($movie->description))
-                <p class="mt-4">
-                    {{ Str::limit($movie->description, 200) }}
-                </p>
-            @endif
-
-            {{-- See details --}}
-            <a
-                href="{{ route('movies.show', ['movie' => $movie->id] )}}"
-                class="mt-4 text-indigo-500 font-bold"
-            >
-                {{ __('See details') }}
-            </a>
-        </div>
+<a
+    href="{{ route('movies.show', ['movie' => $movie->id] )}}"
+>
+    {{-- Poster --}}
+    <div
+        class="rounded shadow-md bg-cover bg-center w-full h-48 md:h-64 lg:h-72"
+        style="background-image: url('{{ $this->getImageUrl('poster', 400) }}')"
+    >
     </div>
-</div>
+    {{-- Title --}}
+    <h3 class="text-center mt-2 font-bold text-lg">
+        {{ $movie->title }}
+    </h3>
+</a>
