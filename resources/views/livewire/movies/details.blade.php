@@ -6,7 +6,7 @@
         <div
             class="backdrop-brightness-[0.4] backdrop-grayscale-[0.3] backdrop-blur-[5px]"
         >
-            <div class="flex gap-6 p-6">
+            <div class="flex gap-6 p-6 flex-col sm:flex-row">
                 {{-- Poster --}}
                 <img
                     src="{{ $this->getImageUrl('poster', '300') }}"
@@ -115,7 +115,7 @@
                     </div>
 
                     {{-- Actions --}}
-                    <div class="self-end flex items-center gap-4">
+                    <div class="self-end flex items-center gap-4 mt-4">
                         {{-- Edit --}}
                         <a
                             href="{{ route('movies.edit', ['movie' => $movie->id] )}}"
