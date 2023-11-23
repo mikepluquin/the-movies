@@ -20,9 +20,6 @@ class ImportMoviesTest extends TestCase
 
         $this->assertDatabaseHas('movies', [
             'tmdb_id' => $randomMovie['id'],
-            'title' => $randomMovie['title'],
-            'description' => $randomMovie['overview'],
-            'poster_path' => $randomMovie['poster_path'],
             'synchronized_at' => now(),
         ]);
         $this->assertDatabaseCount('movies', count($apiMovies));

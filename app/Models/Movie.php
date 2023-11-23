@@ -19,6 +19,8 @@ class Movie extends Model
      */
     protected $casts = [
         'synchronized_at' => 'datetime',
+        'released_at' => 'datetime',
+        'vote_average' => 'float',
     ];
 
     /**
@@ -40,6 +42,7 @@ class Movie extends Model
         return [
             'title' => $this->title,
             'description' => $this->description,
+            'tagline' => $this->tagline,
         ];
     }
 
@@ -97,6 +100,12 @@ class Movie extends Model
             // Use coalescent operator to allow nullable attributes
             $movie->description = $apiMovie['overview'] ?? null;
             $movie->poster_path = $apiMovie['poster_path'] ?? null;
+            $movie->backdrop_path = $apiMovie['backdrop_path'] ?? null;
+            $movie->budget = $apiMovie['budget'] ?? null;
+            $movie->revenue = $apiMovie['revenue'] ?? null;
+            $movie->released_at = $apiMovie['release_date'] ?? null;
+            $movie->homepage_url = $apiMovie['homepage'] ?? null;
+            $movie->runtime = $apiMovie['runtime'] ?? null;
 
             // Save synchronized movie
             $movie->save();

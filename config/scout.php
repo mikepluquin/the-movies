@@ -136,7 +136,7 @@ return [
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
             Movie::class => [
-                'filterableAttributes' => ['title', 'description'],
+                'filterableAttributes' => ['title', 'description', 'tagline'],
             ],
         ],
     ],

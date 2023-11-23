@@ -45,6 +45,13 @@ class MovieTest extends TestCase
             'description' => $apiMovie['overview'],
             'poster_path' => $apiMovie['poster_path'],
             'synchronized_at' => now(),
+            'backdrop_path' => $apiMovie['backdrop_path'],
+            'budget' => $apiMovie['budget'],
+            'revenue' => $apiMovie['revenue'],
+            'released_at' => $apiMovie['release_date'],
+            'homepage_url' => $apiMovie['homepage'],
+            'runtime' => $apiMovie['runtime'],
+            'poster_path' => $apiMovie['poster_path'],
         ]);
         $this->assertDatabaseCount('movies', $count);
     }

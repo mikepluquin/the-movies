@@ -19,8 +19,16 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('poster_path')->nullable();
+            $table->string('backdrop_path')->nullable();
             $table->boolean('synchronization_enabled')->default(true);
             $table->integer('tmdb_id');
+            $table->integer('budget')->nullable();
+            $table->integer('revenue')->nullable();
+            $table->integer('runtime')->nullable();
+            $table->string('homepage_url')->nullable();
+            $table->integer('vote_count')->nullable();
+            $table->float('vote_average')->nullable();
+            $table->datetime('released_at')->nullable();
             $table->datetime('synchronized_at');
 
             $table->timestamps();
