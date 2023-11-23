@@ -5,9 +5,11 @@ namespace App\Models;
 use App\Services\API\TheMovie;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Movie extends Model
 {
+    use Searchable;
     use HasFactory;
 
     /**
@@ -28,6 +30,18 @@ class Movie extends Model
         'synchronization_enabled' => true, // Synchronize automatically movie from API
     ];
 
+     /**
+     * Get the indexable data array for the model.
+     *
+     * @return array<string, mixed>
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'title' => $this->title,
+            'description' => $this->description,
+        ];
+    }
 
     /*
     |--------------------------------------------------------------------------

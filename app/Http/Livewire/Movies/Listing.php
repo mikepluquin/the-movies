@@ -19,15 +19,8 @@ class Listing extends Component
 
     public function render()
     {
-        $query = Movie::query();
-
-        // Search by keywords if present
-        if (!empty($this->search)) {
-            $query->where('title', 'ilike', '%' . $this->search . '%');
-        }
-
         return view('livewire.movies.listing', [
-            'movies' => $query->paginate(5),
+            'movies' => Movie::search($this->search)->paginate(5),
         ]);
     }
 

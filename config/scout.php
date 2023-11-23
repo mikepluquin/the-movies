@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Movie;
+
 return [
 
     /*
@@ -41,7 +43,7 @@ return [
     |
     */
 
-    'queue' => env('SCOUT_QUEUE', false),
+    'queue' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -133,10 +135,9 @@ return [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
-            // 'users' => [
-            //     'filterableAttributes'=> ['id', 'name', 'email'],
-            // ],
+            Movie::class => [
+                'filterableAttributes' => ['title', 'description'],
+            ],
         ],
     ],
-
 ];
