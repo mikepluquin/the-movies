@@ -26,9 +26,9 @@ class Details extends Component
     {
         $this->movie->delete();
 
-        session()->flash('success', __('Movie successfully deleted.'));
-
-        redirect()->route('movies.index');
+        redirect()
+            ->route('movies.index')
+            ->with('success', __('Movie successfully deleted.'));
     }
 
     /**
@@ -38,10 +38,11 @@ class Details extends Component
     {
         $this->authorize('synchronize', $this->movie);
 
+        $this->movie->update(['synchronization_enabled' => true]);
         Movie::synchronizeFromApiId($this->movie->tmdb_id);
 
-        session()->flash('success', __('Movie successfully synchronized.'));
-
-        redirect()->route('movies.show', ['movie' => $this->movie->id]);
+        redirect()
+            ->route('movies.show', ['movie' => $this->movie->id])
+            ->with('success', __('Movie successfully synchronized.'));
     }
 }
