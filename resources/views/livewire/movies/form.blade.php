@@ -1,7 +1,7 @@
 <div>
     {{-- Sync disabled warning --}}
     @if($movie->synchronization_enabled)
-        <div class="bg-orange-200 text-orange-700 p-4 rounded w-fit mb-2 text-sm max-w-sm">
+        <div class="bg-orange-200 text-orange-700 p-4 rounded w-fit mb-2 text-sm max-w-md">
             {{ __('This movie has its synchronization activated: if you modify it, it will no longer be automatically synchronized daily.') }}
         </div>
     @endif
