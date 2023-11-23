@@ -91,7 +91,7 @@ class Movie extends Model
 
             // Check if image attribute exists
             if (
-                !is_null($this->{$imageAttributeName})
+                !empty($this->{$imageAttributeName})
             ) {
                 // Build image's url
                 return "https://image.tmdb.org/t/p/"

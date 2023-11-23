@@ -15,7 +15,7 @@
             </h3>
 
             {{-- Description --}}
-            @if(!is_null($movie->description))
+            @if(!empty($movie->description))
                 <p class="mt-4">
                     {{ Str::limit($movie->description, 200) }}
                 </p>

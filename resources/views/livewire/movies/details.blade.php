@@ -22,21 +22,21 @@
                         <h2 class="text-3xl font-bold mb-1">
                             {{ $movie->title }}
                         </h2>
-                        @if(!is_null($movie->description))
+                        @if(!empty($movie->description))
                             <h3 class="mb-1 italic text-gray-200">
                                 {{ $movie->tagline }}
                             </h3>
                         @endif
 
                         {{-- Duration --}}
-                        @if(!is_null($movie->runtime))
+                        @if(!empty($movie->runtime))
                             <p class="mb-1 text-sm">
                                 {{ Carbon\CarbonInterval::minutes($movie->runtime)->cascade()->forHumans() }}
                             </p>
                         @endif
 
                         {{-- Vote --}}
-                        @if(!is_null($movie->vote_average))
+                        @if(!empty($movie->vote_average))
                             <div class="flex items-center">
                                 <div class="w-24 h-2 bg-white rounded overflow-hidden">
                                     <div
@@ -49,7 +49,7 @@
                                 <span class="text-sm mx-2">
                                     &bull;
                                     {{ $movie->vote_average }} / 10
-                                    @if(!is_null($movie->vote_count))
+                                    @if(!empty($movie->vote_count))
                                         <span class="text-xs">
                                             ({{ number_format($movie->vote_count, 0, '.', ',') . __(' votes') }})
                                         </span>
@@ -58,7 +58,7 @@
                             </div>
                         @endif
 
-                        @if(!is_null($movie->released_at))
+                        @if(!empty($movie->released_at))
                             <p class="mt-2">
                                 {{ $movie->released_at->format('F d, Y') }}
                             </p>
@@ -76,7 +76,7 @@
                         @endif
 
                         {{-- Description --}}
-                        @if(!is_null($movie->description))
+                        @if(!empty($movie->description))
                             <h4 class="font-bold text-xl mt-2">
                                 {{ __('Synopsis') }}
                             </h4>
@@ -91,19 +91,19 @@
                     {{-- Minor details --}}
                     <div>
                         {{-- Budget & revenue --}}
-                        @if(!is_null($movie->budget))
+                        @if(!empty($movie->budget))
                             <p class="text-sm">
                                 {{ __('Budget: $') . number_format($movie->budget, 0, '.', ',') }}
                             </p>
                         @endif
-                        @if(!is_null($movie->revenue))
+                        @if(!empty($movie->revenue))
                             <p class="text-sm">
                                 {{ __('Revenue: $') . number_format($movie->revenue, 0, '.', ',') }}
                             </p>
                         @endif
 
                         {{-- Homepage URL --}}
-                        @if(!is_null($movie->homepage_url))
+                        @if(!empty($movie->homepage_url))
                             <a
                                 href="{{ $movie->homepage_url }}"
                                 target="_blank"
